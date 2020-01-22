@@ -37,3 +37,9 @@ $ flask run
 ```
 $ uwsgi --ini uwsgi.ini
 ```
+
+
+## 重啟nginx
+```
+$ sudo systemctl restart nginx
+```

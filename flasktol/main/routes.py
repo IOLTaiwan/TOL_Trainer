@@ -9,9 +9,9 @@ main = Blueprint('main', __name__)
 @main.route("/")
 @main.route("/home")
 def home():
-	user = User.query.filter_by(username="kchen").first_or_404()
-	user.access=3
-	db.session.commit()
+	# user = User.query.filter_by(username="kchen").first_or_404()
+	# user.access=3
+	# db.session.commit()
 	return render_template("home.html")
 
 # questions page
