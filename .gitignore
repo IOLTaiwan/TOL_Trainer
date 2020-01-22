@@ -1,9 +1,12 @@
 # Specify filepatterns you want git to ignore.
 
-flasktol/static/question_files
-flasktol/static/solution_files
-flasktol/static/answer_files
-flasktol/static/profile_pics
+# flasktol/static/question_files
+# flasktol/static/solution_files
+# flasktol/static/answer_files
+# flasktol/static/profile_pics
 *.pyc
 .env
 # site.db
+*.pid
+*.log
+*.sock
