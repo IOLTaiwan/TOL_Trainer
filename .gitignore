@@ -6,4 +6,4 @@ flasktol/static/answer_files
 flasktol/static/profile_pics
 *.pyc
 .env
-site.db
+# site.db
