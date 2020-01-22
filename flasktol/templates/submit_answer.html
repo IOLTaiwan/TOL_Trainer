@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class='content-section'>
+    <form method='POST' action="" enctype='multipart/form-data'>
+        {{ form.hidden_tag()}}
+        <a href='{{url_for("questions.question", question_id=question.id)}}'> < View question 回到題目</a>
+        <fieldset class="form-group">
+            <legend class='border-bottom mb-4'> Submit answer for "{{question.title}}"</legend>
+            Special Characters<div style="height: 0px;"></div>{{question.special_characters}}  
+            <div style="height: 20px;"></div>
+
+            <div class='form-group'>
+                {{form.content.label(class="form-control-label")}}
+                <br />
+                {% if form.content.errors%}
+                    {{form.content(class='form-control form-control-lg is-invalid')}}
+                    <div class='invalid-feedback'>
+                        {% for error in form.content.errors%}
+                            <span>{{error}}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{form.content(class="form-control form-control-lg")}}
+                {% endif%}
+            </div>
+            <br/>
+            <div class='form-group'>
+                {{form.content_file.label()}}
+                {{form.content_file(class='form-control-file')}}
+                {% if form.content_file.errors%}
+                    {% for error in form.content_file.errors%}
+                        <span class='text-danger'>{{error}}</span></br>
+                    {% endfor %}
+                {%endif%}
+            </div>           
+        </fieldset>
+        <div class='form-group'>
+            {{form.submit(class="btn btn-outline-info") }} 
+        </div>
+    </form>
+        
+</div>
+{% endblock content%}

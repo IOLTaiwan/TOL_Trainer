@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+{% block content %}
+        
+        <article class="media content-section">
+            <div class="media-body">
+            <legend class='border-bottom mb-4'> Questions 題目</legend>
+              <div class='text-right'>
+                {% if a_d_order=="a" %}
+                  <a class="btn btn-info btn-sm" href="{{url_for('questions.question_list',sort_type=sort_type,a_d_order='b')}}" role="button">Ascending<div style="height: 2px;"></div>由下至上</a>
+                {% else %}
+                  <a class="btn btn-info btn-sm" href="{{url_for('questions.question_list',sort_type=sort_type,a_d_order='a')}}" role="button">Descending<div style="height: 2px;"></div>由上至下</a>
+                {% endif %}
+                <div class="btn-group ">
+                  <button type="button" class="btn btn-info dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sort by<div style="height: 2px;"></div>排序
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="{{url_for('questions.question_list',sort_type='id',a_d_order='a')}}">ID</a>
+                    <a class="dropdown-item" href="{{url_for('questions.question_list',sort_type='title',a_d_order='a')}}">Title<div style="height: 2px;"></div>標題</a>
+                    <a class="dropdown-item" href="{{url_for('questions.question_list',sort_type='date',a_d_order='a')}}">Date Added<div style="height: 2px;"></div>新增日期</a>
+                    <a class="dropdown-item" href="{{url_for('questions.question_list',sort_type='source',a_d_order='a')}}">Source<div style="height: 2px;"></div>出處</a>                    <a class="dropdown-item" href="{{url_for('questions.question_list',sort_type='difficulty',a_d_order='a')}}">Difficulty<div style="height: 2px;"></div>難易度</a>
+                    <a class="dropdown-item" href="{{url_for('questions.question_list',sort_type='type',a_d_order='a')}}">Type<div style="height: 2px;"></div>類型</a>
+                    <a class="dropdown-item" href="{{url_for('questions.question_list',sort_type='availability',a_d_order='a')}}">Availability<div style="height: 2px;"></div>開放權限</a>
+                  </div></div>
+
+              </div>
+              <div style="height: 10px;"></div>
+              <div class="table-responsive-sm">
+                <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Title<div style="height: 2px;"></div>標題</th>
+                    <th scope="col">Date Added<div style="height: 2px;"></div>新增日期</th>
+                    <th scope="col">Source<div style="height: 2px;"></div>出處</th>
+                    <th scope="col">Difficulty<div style="height: 2px;"></div>難易度</th>
+                    <th scope="col" style="width: 30%">Type<div style="height: 2px;"></div>類型</th>
+                    <th scope="col">Available to<div style="height: 2px;"></div>開放給...</th>        
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for question in questionlist %}
+                    {% if current_user.is_authenticated %}
+                      {% if current_user.access>=question.access%}
+                        <tr>
+                          <th scope="row">{{question.id}}</th>
+                          <td><a href='{{url_for("questions.question", question_id=question.id)}}'>{{question.title}}</a></td>
+                          <td>{{question.date_posted.strftime("%Y-%m-%d")}}</td>
+                          <td>{{question.source}}</td>
+                          <td>{{question.difficulty}}</td>
+                          <td>{{question.tags}}</td>
+                          {% if question.access == 3 %}
+                            <td> Admin<div style="height: 2px;"></div>管理員</td>
+                            <td><a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{url_for('answers.new_answer',question_id=question.id)}}">Answer 答題</a></td>
+                          {% elif question.access == 2 %}
+                            <td>Trainee<div style="height: 2px;"></div>國手</td>
+                            <td><a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{url_for('answers.new_answer',question_id=question.id)}}">Answer 答題</a></td>
+                          {% else %}
+                            <td>All<div style="height: 2px;"></div>全部</td>
+                            <td><a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{url_for('answers.new_answer',question_id=question.id)}}">Answer 答題</a></td>
+                          {% endif %}
+                        </tr>
+                      {% endif %}
+                    {% else %}
+                      {% if question.access== 1%}
+                        <tr>
+                          <th scope="row">{{question.id}}</th>
+                          <td><a href='{{url_for("questions.question", question_id=question.id)}}'>{{question.title}}</a></td>
+                          <td>{{question.date_posted.strftime("%Y-%m-%d")}}</td>
+                          <td>{{question.source}}</td>
+                          <td>{{question.difficulty}}</td>
+                          <td>{{question.tags}}</td>
+                          <td>All<div style="height: 2px;"></div>全部</td>
+                        </tr>
+                      {% endif %}
+                    {% endif %}
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </article>
+{% endblock content%}

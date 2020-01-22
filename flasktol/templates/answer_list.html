@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block content %}
+        <article class="media content-section">
+            <div class="media-body">
+            <legend class='border-bottom mb-4'> Answers 答題列表</legend>
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">id</th>
+                  <th scope="col">Time Submitted<div style="height: 2px;"></div>答題時間</th>
+                  <th scope="col">User<div style="height: 2px;"></div>用戶</th>
+                  <th scope="col"> Question<div style="height: 2px;"></div>題目</th>
+                  <th scope="col"> Grade<div style="height: 2px;"></div>評分</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for answer in answerlist %}
+                      <tr>
+                        <td>{{answer.id}}</td>
+                        <td><a href='{{url_for("answers.answer", answer_id=answer.id)}}'>{{answer.date_submitted.strftime("%Y-%m-%d %H:%M:%S")}}</a></td>
+                        <td><a href='{{url_for("users.account", username=answer.answerer.username)}}'>{{answer.user_id}} - {{answer.answerer.username}}</a></td>
+                        <td><a href='{{url_for("questions.question", question_id=answer.question_id)}}'>{{answer.question_id}} - {{answer.solveq.title}}</a></td>
+                        <td>{{answer.grade}}</td>
+                        <td><a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{url_for('answers.grade_answer',answer_id=answer.id)}}">Grade 評分</a></td>
+                      </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </article>
+{% endblock content%}

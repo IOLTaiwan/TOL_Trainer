@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+	<article class="media content-section">
+	  <div class="media-body">
+	    <div class="article-metadata">
+			<a href="{{url_for('questions.question_list',sort_type='id',a_d_order='b')}}"> < Back to questions 回到題目列表</a>
+			<br />
+			<br />
+      <legend>Solution 解答</legend>
+      <legend class='border-bottom mb-4'> {{ question.title }}</legend>
+		  <p class="article-content">{{ question.solution }}</p>
+
+		    {% if question.solution_file %}
+		    	{% if ispdf %}
+					<embed src="{{solution_file}}" type="application/pdf"   height="1000px" width="100%">
+		    	{% else %}
+		    		<img src="{{solution_file}}">
+		    	{% endif %}
+		    {% endif %}
+
+	  </div>
+</div>
+</article>
+</div>
+
+{% endblock content%}

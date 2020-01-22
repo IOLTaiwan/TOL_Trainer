@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+        <article class="media content-section">
+            <div class="media-body">
+            <legend class='border-bottom mb-4'> Answers 答題列表</legend>
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Date<div style="height: 2px;"></div>日期</th>
+                  <th scope="col"> Question<div style="height: 2px;"></div>題目</th>
+                  <th scope="col"> Grade<div style="height: 2px;"></div>評分</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for answer in answerlist %}
+                      <tr>
+                        <td><a href='{{url_for("answers.answer", answer_id=answer.id)}}'>{{answer.date_submitted.strftime("%Y-%m-%d %H:%M:%S")}}</a></td>
+                        <td>{{answer.question_id}} - {{answer.solveq.title}}</td>
+                        <td>{{answer.grade}}</td>
+                      </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </article>
+{% endblock content%}

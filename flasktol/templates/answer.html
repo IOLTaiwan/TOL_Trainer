@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+	<article class="media content-section">
+	  <div class="media-body">
+	    <div class="article-metadata">
+
+            <legend class="border-bottom mb-4">{{answer.answerer.username}} -> {{answer.solveq.title}}</legend>
+            
+		    <p class="article-content">{{ answer.content }}</p>
+
+		    {% if answer.content_file %}
+		    	{% if ispdf %}
+					<embed src="{{content_file}}" type="application/pdf"   height="500px" width="100%">
+		    	{% else %}
+		    		<img src="{{content_file}}">
+		    	{% endif %}
+		    {% endif %}
+
+	  </div>
+    <small class="text-muted">Added 新增日期: {{ answer.date_submitted.strftime("%Y-%m-%d %H:%M:%S") }}</small>
+
+</div>
+</article>
+
+
+{% endblock content%}

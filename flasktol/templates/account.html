@@ -1,0 +1,107 @@
+{% extends "layout.html" %}
+{% block content %}
+	<div class="content-section">
+	  <div class="media">
+	    <img class="rounded-circle account-img" src="{{image_file}}">
+	    <div class="media-body">
+	      <h2 class="account-heading">{{user.username}}</h2>
+
+	      <p class="text-secondary">{{user.email}}</p>
+	    </div>
+	  </div>
+		<form method="POST" action="" enctype="multipart/form-data">
+			{{ form.hidden_tag()}}
+			<div style="height: 20px;"></div>
+			<fieldset class="form-group">
+				<legend class="border-bottom mb-4"> Statistics 統計</legend>
+	      		<p class="text-secondary">Questions Attempted 解題數: {{attempted_count}}</p>
+	      		<p class="text-secondary">Answers Submitted 答題次數: {{answers_submitted}}</p>
+	      		<p class="text-secondary">Total Score 總成績: {{total_score}}</p>
+	      		{% if attempted_count==0 %}
+		      		<p class="text-secondary">Average Score 平均成績: 0</p>
+				{% else%}
+		      		<p class="text-secondary">Average Score 平均成績: {{total_score/attempted_count}}</p>
+				{% endif%}	      			      		
+				<div style="height: 20px;"></div>
+				<legend class="border-bottom mb-4"> Account Info 帳號資訊</legend>
+				{% if current_user.is_admin() %}
+					{% if user.username==current_user.username %}
+						<div class="form-group">
+							{{form.access.label(class="form-control-label")}}
+							<br/>
+							<p class="form-control form-control-lg" readonly=readonly>Admin 管理員</p>
+							<p class="text-muted">(You cannot change your own access level 您無法改變自己的權限)</p>					
+						</div>
+
+					{% else %}
+						<div class="form-group">
+							{{form.access.label(class="form-control-label")}}
+							<br/>
+							{% if form.access.errors%}
+								{{form.access(class="form-control form-control-lg is-invalid")}}
+								<div class="invalid-feedback">
+									{% for error in form.access.errors%}
+										<span>{{error}}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{form.access(class="form-control form-control-lg")}}
+							{% endif %}
+						</div>
+
+					{% endif %}
+				<br/>
+				{% endif %}
+
+
+				<div class="form-group">
+					{{form.username.label(class="form-control-label")}}
+					<br/>
+					{% if form.username.errors%}
+						{{form.username(class="form-control form-control-lg is-invalid")}}
+						<div class="invalid-feedback">
+							{% for error in form.username.errors%}
+								<span>{{error}}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{form.username(class="form-control form-control-lg")}}
+					{% endif%}
+
+
+				</div>
+				<br/>
+				<div class="form-group">
+					{{form.email.label(class="form-control-label")}}
+					<br />
+					{% if form.email.errors%}
+						{{form.email(class="form-control form-control-lg is-invalid")}}
+						<div class="invalid-feedback">
+							{% for error in form.email.errors%}
+								<span>{{error}}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{form.email(class="form-control form-control-lg")}}
+					{% endif%}
+				</div>
+				<br/>
+				<div class="form-group">
+					{{form.picture.label()}}
+					{{form.picture(class="form-control-file")}}
+					{% if form.picture.errors%}
+						{% for error in form.picture.errors%}
+							<span class="text-danger">{{error}}</span></br>
+						{% endfor %}
+					{%endif%}
+				</div>
+				<br/>
+			</fieldset>
+			<div class="form-group">
+				{{form.submit(class="btn btn-outline-info")}}
+			</div>
+			
+		</form>
+			
+	</div>
+{% endblock content%}

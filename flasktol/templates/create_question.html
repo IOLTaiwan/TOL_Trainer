@@ -1,0 +1,155 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class='content-section'>
+    <form method='POST' action="" enctype='multipart/form-data'>
+        {{ form.hidden_tag()}}
+
+        <fieldset class="form-group">
+            <legend class='border-bottom mb-4'> {{legend}}</legend>
+            <div class='form-group'>
+                {{form.title.label(class="form-control-label")}}
+                <br />
+                {% if form.title.errors%}
+                    {{form.title(class='form-control form-control-lg is-invalid')}}
+                    <div class='invalid-feedback'>
+                        {% for error in form.title.errors%}
+                            <span>{{error}}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{form.title(class="form-control form-control-lg")}}
+                {% endif%}
+            </div>
+            <br/>
+            <div class='form-group'>
+                {{form.content.label(class="form-control-label")}}
+                <br />
+                {% if form.content.errors%}
+                    {{form.content(class='form-control form-control-lg is-invalid')}}
+                    <div class='invalid-feedback'>
+                        {% for error in form.content.errors%}
+                            <span>{{error}}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{form.content(class="form-control form-control-lg")}}
+                {% endif%}
+            </div>
+            <br/>
+            <div class='form-group'>
+                {{form.content_file.label()}}
+                {{form.content_file(class='form-control-file')}}
+                {% if form.content_file.errors%}
+                    {% for error in form.content_file.errors%}
+                        <span class='text-danger'>{{error}}</span></br>
+                    {% endfor %}
+                {%endif%}
+            </div> 
+            <br/>  
+            <div class='form-group'>
+                {{form.access.label()}}
+                {{form.access(class='form-control')}}
+                {% if form.access.errors%}
+                    {% for error in form.access.errors%}
+                        <span class='text-danger'>{{error}}</span></br>
+                    {% endfor %}
+                {%endif%}
+            </div>
+            <br/>
+            <div class='form-group'>
+                {{form.difficulty.label()}}
+                {{form.difficulty(class='form-control')}}
+                {% if form.difficulty.errors%}
+                    {% for error in form.difficulty.errors%}
+                        <span class='text-danger'>{{error}}</span></br>
+                    {% endfor %}
+                {%endif%}
+            </div> 
+            <br/> 
+            <div class='form-group'>
+                {{form.tags.label()}}
+                {{form.tags()}}
+                {% if form.tags.errors%}
+                    {% for error in form.tags.errors%}
+                        <span class='text-danger'>{{error}}</span></br>
+                    {% endfor %}
+                {%endif%}
+            </div>
+            <br/>
+            <div class='form-group'>
+                {{form.source.label(class="form-control-label")}}
+                <br />
+                {% if form.source.errors%}
+                    {{form.source(class='form-control form-control-lg is-invalid')}}
+                    <div class='invalid-feedback'>
+                        {% for error in form.source.errors%}
+                            <span>{{error}}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{form.source(class="form-control form-control-lg")}}
+                {% endif%}
+            </div>
+            <br/>
+            <div class='form-group'>
+                {{form.open_solution.label(class="form-check-label")}}
+                <br />
+                {% if form.open_solution.errors%}
+                    {{form.open_solution(class='form-check is-invalid form-control-lg')}}
+                    <div class='invalid-feedback'>
+                        {% for error in form.open_solution.errors%}
+                            <span>{{error}}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{form.open_solution(class="form-check form-check form-control-lg")}}
+                {% endif%}
+            </div>
+            <br/>
+            <div class='form-group'>
+                {{form.solution.label(class="form-control-label")}}
+                <br />
+                {% if form.solution.errors%}
+                    {{form.solution(class='form-control form-control-lg is-invalid')}}
+                    <div class='invalid-feedback'>
+                        {% for error in form.solution.errors%}
+                            <span>{{error}}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{form.solution(class="form-control form-control-lg")}}
+                {% endif%}
+            </div>
+            <br/>
+            <div class='form-group'>
+                {{form.solution_file.label()}}
+                {{form.solution_file(class='form-control-file')}}
+                {% if form.solution_file.errors%}
+                    {% for error in form.solution_file.errors%}
+                        <span class='text-danger'>{{error}}</span></br>
+                    {% endfor %}
+                {%endif%}
+            </div> 
+            <br/>
+            <div class='form-group'>
+                {{form.special_characters.label(class="form-control-label")}}
+                <br />
+                {% if form.special_characters.errors%}
+                    {{form.special_characters(class='form-control form-control-lg is-invalid')}}
+                    <div class='invalid-feedback'>
+                        {% for error in form.special_characters.errors%}
+                            <span>{{error}}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{form.special_characters(class="form-control form-control-lg")}}
+                {% endif%}
+            </div>         
+        </fieldset>
+        <div class='form-group'>
+            {{form.submit(class="btn btn-outline-info") }} 
+        </div>
+    </form>
+        
+</div>
+{% endblock content%}

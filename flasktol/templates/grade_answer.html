@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class='content-section'>
+    <form method='POST' action="" enctype='multipart/form-data'>
+        {{ form.hidden_tag()}}
+
+        <fieldset class="form-group">
+            <legend class='border-bottom mb-4'> {{legend}}</legend>
+            <div class='form-group'>
+                {{form.grade.label(class="form-control-label")}}
+                <br />
+                {% if form.grade.errors%}
+                    {{form.grade(class='form-control form-control-lg is-invalid')}}
+                    <div class='invalid-feedback'>
+                        {% for error in form.grade.errors%}
+                            <span>{{error}}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{form.grade(class="form-control form-control-lg")}}
+                {% endif%}
+            </div>
+        </fieldset>
+        <div class='form-group'>
+            {{form.submit(class="btn btn-outline-info") }} 
+        </div>
+    </form>
+        
+</div>
+{% endblock content%}

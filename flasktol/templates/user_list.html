@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+
+        <article class="media content-section">
+          <div class="media-body">
+          <legend class='border-bottom mb-4'>List of Users 用戶列表</legend>
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">id</th>
+                  <th scope="col">Username<div style="height: 2px;"></div>用戶</th>
+                  <th scope="col">Email<div style="height: 2px;"></div>電子郵件</th>
+                  <th scope="col">Access Level<div style="height: 2px;"></div>權限</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for user in userlist%}
+                    <tr>
+                      <th scope="row">{{user.id}}</th>
+                      <td><a href='{{url_for("users.account", username=user.username)}}''>{{user.username}}</a></td>
+                      <td>{{user.email}}</td>
+                      <td>{{user.access}}</td>
+                    </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </article>
+{% endblock content%}
